@@ -22,7 +22,7 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative w-full h-[360px] md:h-[700px]">
+      <section className="relative w-full h-[360px] md:h-[900px]">
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"
