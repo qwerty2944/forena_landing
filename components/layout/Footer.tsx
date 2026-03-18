@@ -150,18 +150,6 @@ export default function Footer() {
           개인정보처리방침
         </a>
 
-        {/* TOP 버튼 */}
-        <div className="flex justify-end mt-[20px]">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-[48px] h-[48px] border border-[#555] flex items-center justify-center"
-          >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round">
-              <path d="M9 14V4" />
-              <path d="M4 8L9 3L14 8" />
-            </svg>
-          </button>
-        </div>
       </div>
     </footer>
   );

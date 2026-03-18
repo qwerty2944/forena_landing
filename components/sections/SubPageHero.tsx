@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface BreadcrumbItem {
@@ -21,17 +22,20 @@ export default function SubPageHero({
   return (
     <>
       <section
-        className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center overflow-hidden"
-        style={
-          backgroundImage
-            ? {
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }
-            : undefined
-        }
+        className="relative w-full h-[200px] md:h-[400px] flex items-center justify-center overflow-hidden bg-[#001a30]"
       >
+        {/* Background image via next/image */}
+        {backgroundImage && (
+          <Image
+            src={backgroundImage}
+            alt={title}
+            fill
+            className="object-contain md:object-cover"
+            priority
+            sizes="100vw"
+          />
+        )}
+
         {/* Multi-layer gradient background (when no image) */}
         {!backgroundImage && (
           <div className="absolute inset-0 bg-gradient-to-br from-[#001a30] via-[#003057] to-[#1a4a6e]">
