@@ -3,13 +3,19 @@ import './globals.css';
 import LayoutShell from '@/components/layout/LayoutShell';
 
 export const metadata: Metadata = {
-  title: '포레나 인천시청역',
-  description: '포레나 인천시청역 - 인천의 새로운 랜드마크. 대한토지신탁 시행, 포스코이앤씨 시공.',
-  keywords: '포레나, 인천시청역, 아파트, 분양, 포스코이앤씨, 인천',
+  title: '포레나, 더샵, 포레나더샵 인천시청역',
+  description: '포레나, 더샵, 포레나더샵 인천시청역',
+  keywords: '포레나, 더샵, 포레나더샵, 인천시청역, 아파트, 분양, GTX-B',
   openGraph: {
-    title: '포레나 인천시청역',
-    description: '포레나 인천시청역 - 인천의 새로운 랜드마크',
+    title: '포레나, 더샵, 포레나더샵 인천시청역',
+    description: '포레나, 더샵, 포레나더샵 인천시청역',
     type: 'website',
+    siteName: '포레나더샵 인천시청역',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '포레나, 더샵, 포레나더샵 인천시청역',
+    description: '포레나, 더샵, 포레나더샵 인천시청역',
   },
 };
 
