@@ -74,15 +74,16 @@ export default function PopupBanner() {
     <AnimatePresence>
       {/* Video popup */}
       {phase === 'video' && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-black/85"
-            onClick={() => handleCloseVideo(false)}
-          />
+        <motion.div
+          initial={{ y: '-100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '-100%' }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 1] }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85"
+        >
+          {/* 배경 클릭으로 닫기 */}
+          <div className="absolute inset-0" onClick={() => handleCloseVideo(false)} />
+
           <div className="absolute top-[30px] left-0 right-0 z-20 flex items-center justify-center">
             <button
               onClick={() => handleCloseVideo(false)}
@@ -95,13 +96,7 @@ export default function PopupBanner() {
               </svg>
             </button>
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: '-100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '-100%' }}
-            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 1] }}
-            className="relative z-10 w-[90%] max-w-[900px]"
-          >
+          <div className="relative z-10 w-[90%] max-w-[900px]">
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -111,8 +106,8 @@ export default function PopupBanner() {
                 allowFullScreen
               />
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       )}
 
       {/* Image popups */}
