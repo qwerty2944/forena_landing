@@ -13,22 +13,26 @@ declare global {
 interface MapLocation {
   label: string;
   address: string;
-  lat: number;
-  lng: number;
+  // 카카오 WCONGNAMUL 좌표계
+  x: number;
+  y: number;
+  mapUrl: string;
 }
 
 const LOCATIONS: { modelHouse: MapLocation; site: MapLocation } = {
   modelHouse: {
-    label: '견본주택',
+    label: '인천 남동구 구월동 1140-1',
     address: CONTACT.modelHouse.address,
-    lat: 37.4434,
-    lng: 126.7052,
+    x: 434918,
+    y: 1098437,
+    mapUrl: 'https://map.kakao.com/?urlX=434918.000000001&urlY=1098437.0000000007&name=%EC%9D%B8%EC%B2%9C%20%EB%82%A8%EB%8F%99%EA%B5%AC%20%EA%B5%AC%EC%9B%94%EB%8F%99%201140-1&map_type=TYPE_MAP&from=roughmap',
   },
   site: {
-    label: '현장',
+    label: '인천 남동구 간석동 311-1',
     address: CONTACT.site.address,
-    lat: 37.4567,
-    lng: 126.7083,
+    x: 435217,
+    y: 1101346,
+    mapUrl: 'https://map.kakao.com/?urlX=435217.0000000016&urlY=1101346.999999996&name=%EC%9D%B8%EC%B2%9C%20%EB%82%A8%EB%8F%99%EA%B5%AC%20%EA%B0%84%EC%84%9D%EB%8F%99%20311-1&map_type=TYPE_MAP&from=roughmap',
   },
 };
 
@@ -78,14 +82,17 @@ function KakaoMap({ location }: { location: MapLocation }) {
   useEffect(() => {
     if (!ready || !mapRef.current) return;
 
-    const coords = new window.kakao.maps.LatLng(location.lat, location.lng);
+    // WCONGNAMUL 좌표 → LatLng 변환
+    const wcCoords = new window.kakao.maps.Coords(location.x, location.y);
+    const latLng = wcCoords.toLatLng();
+
     const map = new window.kakao.maps.Map(mapRef.current, {
-      center: coords,
+      center: latLng,
       level: 3,
     });
 
     const marker = new window.kakao.maps.Marker({
-      position: coords,
+      position: latLng,
       map,
     });
 
@@ -125,7 +132,7 @@ export default function ContactSection() {
                 <h3 className="text-[18px] font-bold text-primary-navy mb-[6px]">견본주택</h3>
                 <p className="text-[14px] text-[#666] mb-[15px]">{CONTACT.modelHouse.address}</p>
                 <a
-                  href={MAP_LINKS.modelHouse.kakao}
+                  href={LOCATIONS.modelHouse.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-[6px] bg-primary-navy text-white px-[24px] py-[10px] text-[14px] font-medium hover:bg-primary-navy/90 transition-colors"
@@ -143,7 +150,7 @@ export default function ContactSection() {
                 <h3 className="text-[18px] font-bold text-primary-navy mb-[6px]">현장</h3>
                 <p className="text-[14px] text-[#666] mb-[15px]">{CONTACT.site.address}</p>
                 <a
-                  href={MAP_LINKS.site.kakao}
+                  href={LOCATIONS.site.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-[6px] bg-primary-navy text-white px-[24px] py-[10px] text-[14px] font-medium hover:bg-primary-navy/90 transition-colors"
