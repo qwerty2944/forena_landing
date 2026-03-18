@@ -29,15 +29,18 @@ export default function PopupBanner() {
   useEffect(() => {
     setMounted(true);
 
-    if (!usePopupStore.getState().isHiddenToday('video', 'video')) {
-      setPhase('video');
-    } else {
-      const state = usePopupStore.getState();
-      const hasVisiblePopup = IMAGE_POPUPS.some(
-        (p) => !state.isHiddenToday(p.id, 'popup')
-      );
-      if (hasVisiblePopup) setPhase('popups');
-    }
+    const timer = setTimeout(() => {
+      if (!usePopupStore.getState().isHiddenToday('video', 'video')) {
+        setPhase('video');
+      } else {
+        const state = usePopupStore.getState();
+        const hasVisiblePopup = IMAGE_POPUPS.some(
+          (p) => !state.isHiddenToday(p.id, 'popup')
+        );
+        if (hasVisiblePopup) setPhase('popups');
+      }
+    }, 800);
+    return () => clearTimeout(timer);
   }, []);
 
   // 모바일 자동 캐러셀
