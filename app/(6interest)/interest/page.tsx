@@ -16,7 +16,7 @@ export default function InterestPage() {
     <>
       <SubPageHero
         title="관심고객등록"
-        backgroundImage="/images/interest/hero.jpg"
+        backgroundImage="/images/interest/hero.webp"
         breadcrumb={[
           { label: 'HOME', href: '/' },
           { label: '관심고객등록', href: '/interest' },

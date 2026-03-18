@@ -5,10 +5,10 @@ import Image from 'next/image';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
 
 const LOCATION_IMAGES = [
-  '/images/main/location_thum_1.jpg',
-  '/images/main/location_thum_2.jpg',
-  '/images/main/location_thum_3.jpg',
-  '/images/main/location_thum_4.jpg',
+  '/images/main/location_thum_1.webp',
+  '/images/main/location_thum_2.webp',
+  '/images/main/location_thum_3.webp',
+  '/images/main/location_thum_4.webp',
 ];
 
 const LOCATION_DETAILS = [

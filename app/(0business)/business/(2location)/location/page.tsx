@@ -8,7 +8,7 @@ export default function LocationPage() {
     <>
       <SubPageHero
         title="입지환경"
-        backgroundImage="/images/business/hero.jpg"
+        backgroundImage="/images/business/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '사업안내', href: '/business/planning' },
@@ -19,7 +19,7 @@ export default function LocationPage() {
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         {/* Title Image */}
         <Image
-          src="/images/business/location_tit.jpg"
+          src="/images/business/location_tit.webp"
           alt="입지환경"
           width={1000}
           height={200}
@@ -30,7 +30,7 @@ export default function LocationPage() {
         {/* 크게보기 Button */}
         <div className="mt-6 text-center">
           <button
-            onClick={() => window.open('/images/business/location_tit.jpg', '_blank', 'width=1200,height=900,scrollbars=yes,resizable=yes')}
+            onClick={() => window.open('/images/business/location_tit.webp', '_blank', 'width=1200,height=900,scrollbars=yes,resizable=yes')}
             className="inline-flex items-center gap-2 px-8 py-3 border border-[#bbb] rounded-full text-[#555] text-[14px] font-medium hover:border-[#333] hover:text-[#333] transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,7 +43,7 @@ export default function LocationPage() {
         {/* Map Image */}
         <div className="mt-8">
           <Image
-            src="/images/business/location_txt.jpg"
+            src="/images/business/location_txt.webp"
             alt="입지안내도"
             width={1000}
             height={700}

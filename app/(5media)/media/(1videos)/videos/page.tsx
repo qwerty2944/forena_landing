@@ -12,7 +12,7 @@ export default function VideosPage() {
     <>
       <SubPageHero
         title="홍보영상"
-        backgroundImage="/images/subscription/hero.jpg"
+        backgroundImage="/images/subscription/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '홍보센터', href: '/media/news' },

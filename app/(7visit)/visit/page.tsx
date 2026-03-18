@@ -16,7 +16,7 @@ export default function VisitPage() {
     <>
       <SubPageHero
         title="방문예약"
-        backgroundImage="/images/visit/hero.jpg"
+        backgroundImage="/images/visit/hero.webp"
         breadcrumb={[
           { label: 'HOME', href: '/' },
           { label: '방문예약', href: '/visit' },

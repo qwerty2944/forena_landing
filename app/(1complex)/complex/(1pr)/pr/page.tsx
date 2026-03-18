@@ -16,7 +16,7 @@ export default function PrVideoPage() {
     <>
       <SubPageHero
         title="단지홍보영상"
-        backgroundImage="/images/complex/hero.jpg"
+        backgroundImage="/images/complex/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '단지안내', href: '/complex/info' },

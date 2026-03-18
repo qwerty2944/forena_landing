@@ -10,12 +10,12 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 
 const ICON_MAP: Record<string, string> = {
-  transit: '/images/main/premium_ico_1.png',
-  school: '/images/main/premium_ico_2.png',
-  park: '/images/main/premium_ico_3.png',
-  shopping: '/images/main/premium_ico_4.png',
-  design: '/images/main/premium_ico_5.png',
-  value: '/images/main/premium_ico_6.png',
+  transit: '/images/main/premium_ico_1.webp',
+  school: '/images/main/premium_ico_2.webp',
+  park: '/images/main/premium_ico_3.webp',
+  shopping: '/images/main/premium_ico_4.webp',
+  design: '/images/main/premium_ico_5.webp',
+  value: '/images/main/premium_ico_6.webp',
 };
 
 export default function PremiumSection() {

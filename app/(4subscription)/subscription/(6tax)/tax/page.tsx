@@ -13,7 +13,7 @@ export default function TaxPage() {
     <>
       <SubPageHero
         title="인지세안내문"
-        backgroundImage="/images/subscription/hero.jpg"
+        backgroundImage="/images/subscription/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '청약안내', href: '/subscription/guide' },
@@ -23,7 +23,7 @@ export default function TaxPage() {
 
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         <Image
-          src="/images/subscription/stamp-tax.jpg"
+          src="/images/subscription/stamp-tax.webp"
           alt="인지세안내문"
           width={1000}
           height={1400}

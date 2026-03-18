@@ -8,9 +8,9 @@ import Link from 'next/link';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
 
 const TYPE_IMAGES = [
-  '/images/main/type_thumb_1.jpg',
-  '/images/main/type_thumb_2.jpg',
-  '/images/main/type_thumb_3.jpg',
+  '/images/main/type_thumb_1.webp',
+  '/images/main/type_thumb_2.webp',
+  '/images/main/type_thumb_3.webp',
 ];
 
 export default function UnitTypeSection() {

@@ -13,7 +13,7 @@ export default function FinancingPage() {
     <>
       <SubPageHero
         title="자금조달계획서"
-        backgroundImage="/images/subscription/hero.jpg"
+        backgroundImage="/images/subscription/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '청약안내', href: '/subscription/guide' },
@@ -23,7 +23,7 @@ export default function FinancingPage() {
 
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         <Image
-          src="/images/subscription/financing-plan.jpg"
+          src="/images/subscription/financing-plan.webp"
           alt="자금조달계획서"
           width={1000}
           height={1400}

@@ -92,7 +92,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <div className="h-[56px] border-b border-[#ddd] flex items-center justify-between px-[16px] shrink-0">
               <Link href="/" onClick={handleLinkClick}>
                 <Image
-                  src="/images/main/top_logo.png"
+                  src="/images/main/top_logo.webp"
                   alt="FORENA THE SHOP"
                   width={253}
                   height={21}

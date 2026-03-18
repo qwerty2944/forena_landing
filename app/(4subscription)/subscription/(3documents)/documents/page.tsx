@@ -5,13 +5,13 @@ import Image from 'next/image';
 import SubPageHero from '@/components/sections/SubPageHero';
 
 const TABS = [
-  { label: '신혼부부', image: '/images/subscription/documents-01.jpg' },
-  { label: '기관추천', image: '/images/subscription/documents-02.jpg' },
-  { label: '다자녀가구', image: '/images/subscription/documents-03.jpg' },
-  { label: '노부모부양', image: '/images/subscription/documents-04.jpg' },
-  { label: '생애최초', image: '/images/subscription/documents-05.jpg' },
-  { label: '일반공급', image: '/images/subscription/documents-06.jpg' },
-  { label: '소명안내', image: '/images/subscription/documents-07.jpg' },
+  { label: '신혼부부', image: '/images/subscription/documents-01.webp' },
+  { label: '기관추천', image: '/images/subscription/documents-02.webp' },
+  { label: '다자녀가구', image: '/images/subscription/documents-03.webp' },
+  { label: '노부모부양', image: '/images/subscription/documents-04.webp' },
+  { label: '생애최초', image: '/images/subscription/documents-05.webp' },
+  { label: '일반공급', image: '/images/subscription/documents-06.webp' },
+  { label: '소명안내', image: '/images/subscription/documents-07.webp' },
 ];
 
 export default function DocumentsPage() {
@@ -21,7 +21,7 @@ export default function DocumentsPage() {
     <>
       <SubPageHero
         title="구비서류안내"
-        backgroundImage="/images/subscription/hero.jpg"
+        backgroundImage="/images/subscription/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '청약안내', href: '/subscription/guide' },

@@ -10,10 +10,10 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 
 const slides = [
-  { id: 1, src: '/images/main/main1.jpg' },
-  { id: 2, src: '/images/main/main2.jpg' },
-  { id: 3, src: '/images/main/main3.jpg' },
-  { id: 4, src: '/images/main/main4.jpg' },
+  { id: 1, src: '/images/main/main1.webp' },
+  { id: 2, src: '/images/main/main2.webp' },
+  { id: 3, src: '/images/main/main3.webp' },
+  { id: 4, src: '/images/main/main4.webp' },
 ];
 
 export default function HeroSection() {

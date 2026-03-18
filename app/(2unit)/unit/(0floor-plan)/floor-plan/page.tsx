@@ -8,7 +8,7 @@ const FLOOR_PLAN_DATA = [
   {
     id: 1,
     label: '49㎡',
-    image: '/images/unit/unit01.jpg',
+    image: '/images/unit/unit01.webp',
     exclusiveArea: '49.9664',
     commonArea: '24.0882',
     supplyArea: '74.0546',
@@ -19,7 +19,7 @@ const FLOOR_PLAN_DATA = [
   {
     id: 2,
     label: '59㎡A',
-    image: '/images/unit/unit02.jpg',
+    image: '/images/unit/unit02.webp',
     exclusiveArea: '59.9855',
     commonArea: '24.9529',
     supplyArea: '84.9384',
@@ -30,7 +30,7 @@ const FLOOR_PLAN_DATA = [
   {
     id: 3,
     label: '59㎡B',
-    image: '/images/unit/unit03.jpg',
+    image: '/images/unit/unit03.webp',
     exclusiveArea: '59.9405',
     commonArea: '24.9343',
     supplyArea: '84.8748',
@@ -48,7 +48,7 @@ export default function FloorPlanPage() {
     <>
       <SubPageHero
         title="평면정보"
-        backgroundImage="/images/unit/hero.jpg"
+        backgroundImage="/images/unit/hero.webp"
         breadcrumb={[
           { label: 'HOME', href: '/' },
           { label: '세대안내', href: '/unit/floor-plan' },

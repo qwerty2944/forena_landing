@@ -21,7 +21,7 @@ export default function PreliminaryVisitPage() {
     <>
       <SubPageHero
         title="예비 당첨자 서류접수 방문예약"
-        backgroundImage="/images/visit/hero.jpg"
+        backgroundImage="/images/visit/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '방문예약', href: '/visit' },
@@ -32,7 +32,7 @@ export default function PreliminaryVisitPage() {
       <div className="max-w-[800px] mx-auto px-[20px] py-[60px]">
         {/* Top Banner Image */}
         <Image
-          src="/images/visit/preliminary-banner.jpg"
+          src="/images/visit/preliminary-banner.webp"
           alt="예비 당첨자 서류접수 방문예약"
           width={1000}
           height={400}

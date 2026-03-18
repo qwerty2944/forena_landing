@@ -19,12 +19,12 @@ export default function MobileCommunicationPage() {
     <>
       <SubPageHero
         title="이동통신 협의 결과서"
-        backgroundImage="/images/complex/hero.jpg"
+        backgroundImage="/images/complex/hero.webp"
         breadcrumb={BREADCRUMB}
       />
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         <Image
-          src="/images/complex/mobile.jpg"
+          src="/images/complex/mobile.webp"
           alt="이동통신 협의 결과서"
           width={1000}
           height={700}

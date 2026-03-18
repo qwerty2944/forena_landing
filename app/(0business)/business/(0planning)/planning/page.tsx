@@ -23,7 +23,7 @@ export default function PlanningPage() {
     <>
       <SubPageHero
         title="사업개요"
-        backgroundImage="/images/business/hero.jpg"
+        backgroundImage="/images/business/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '사업안내', href: '/business/planning' },
@@ -34,7 +34,7 @@ export default function PlanningPage() {
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         {/* 건물 이미지 */}
         <Image
-          src="/images/business/planning.jpg"
+          src="/images/business/planning.webp"
           alt="사업개요"
           width={1000}
           height={600}

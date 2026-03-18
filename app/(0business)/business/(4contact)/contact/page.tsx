@@ -13,7 +13,7 @@ export default function ContactPage() {
     <>
       <SubPageHero
         title="찾아오시는길"
-        backgroundImage="/images/business/hero.jpg"
+        backgroundImage="/images/business/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '사업안내', href: '/business/planning' },
@@ -26,7 +26,7 @@ export default function ContactPage() {
           {/* Map Image */}
           <div className="md:flex-1">
             <Image
-              src="/images/business/contact.jpg"
+              src="/images/business/contact.webp"
               alt="찾아오시는길"
               width={600}
               height={500}

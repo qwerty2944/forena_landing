@@ -5,14 +5,14 @@ import Image from 'next/image';
 import SubPageHero from '@/components/sections/SubPageHero';
 
 const TABS = [
-  { label: '인터넷 청약안내', image: '/images/subscription/guide-01.jpg' },
-  { label: '특별공급', image: '/images/subscription/guide-02.jpg' },
-  { label: '기관추천', image: '/images/subscription/guide-03.jpg' },
-  { label: '다자녀가구', image: '/images/subscription/guide-04.jpg' },
-  { label: '신혼부부', image: '/images/subscription/guide-05.jpg' },
-  { label: '노부모부양', image: '/images/subscription/guide-06.jpg' },
-  { label: '생애최초', image: '/images/subscription/guide-07.jpg' },
-  { label: '일반공급', image: '/images/subscription/guide-08.jpg' },
+  { label: '인터넷 청약안내', image: '/images/subscription/guide-01.webp' },
+  { label: '특별공급', image: '/images/subscription/guide-02.webp' },
+  { label: '기관추천', image: '/images/subscription/guide-03.webp' },
+  { label: '다자녀가구', image: '/images/subscription/guide-04.webp' },
+  { label: '신혼부부', image: '/images/subscription/guide-05.webp' },
+  { label: '노부모부양', image: '/images/subscription/guide-06.webp' },
+  { label: '생애최초', image: '/images/subscription/guide-07.webp' },
+  { label: '일반공급', image: '/images/subscription/guide-08.webp' },
 ];
 
 export default function GuidePage() {
@@ -22,7 +22,7 @@ export default function GuidePage() {
     <>
       <SubPageHero
         title="청약안내문"
-        backgroundImage="/images/subscription/hero.jpg"
+        backgroundImage="/images/subscription/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '청약안내', href: '/subscription/guide' },

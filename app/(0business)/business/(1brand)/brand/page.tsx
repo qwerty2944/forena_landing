@@ -11,7 +11,7 @@ export default function BrandPage() {
     <>
       <SubPageHero
         title="브랜드 소개"
-        backgroundImage="/images/business/hero.jpg"
+        backgroundImage="/images/business/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '사업안내', href: '/business/planning' },
@@ -48,7 +48,7 @@ export default function BrandPage() {
         {activeTab === 'forena' && (
           <div className="mt-10">
             <Image
-              src="/images/business/brand.jpg"
+              src="/images/business/brand.webp"
               alt="FORENA 브랜드"
               width={1000}
               height={1400}
@@ -63,7 +63,7 @@ export default function BrandPage() {
           <div className="mt-10">
             {/* Award Title */}
             <Image
-              src="/images/business/brand_award_tit.jpg"
+              src="/images/business/brand_award_tit.webp"
               alt="소비자가 인정한 No.1 브랜드"
               width={1000}
               height={120}
@@ -75,7 +75,7 @@ export default function BrandPage() {
               {[1, 2, 3, 4, 5].map((n) => (
                 <Image
                   key={n}
-                  src={`/images/business/brand_award_img${n}.jpg`}
+                  src={`/images/business/brand_award_img${n}.webp`}
                   alt={`수상 ${n}`}
                   width={170}
                   height={200}
@@ -89,7 +89,7 @@ export default function BrandPage() {
                 {[1, 2, 3, 4].map((n) => (
                   <Image
                     key={n}
-                    src={`/images/business/brand_award_img${n}.jpg`}
+                    src={`/images/business/brand_award_img${n}.webp`}
                     alt={`수상 ${n}`}
                     width={170}
                     height={200}
@@ -99,7 +99,7 @@ export default function BrandPage() {
               </div>
               <div className="flex justify-center mt-[10px]">
                 <Image
-                  src="/images/business/brand_award_img5.jpg"
+                  src="/images/business/brand_award_img5.webp"
                   alt="수상 5"
                   width={170}
                   height={200}
@@ -127,7 +127,7 @@ export default function BrandPage() {
             {/* Brand Identity Image */}
             <div className="mt-12">
               <Image
-                src="/images/business/brand_img1.jpg"
+                src="/images/business/brand_img1.webp"
                 alt="더샵 브랜드 아이덴티티"
                 width={1000}
                 height={600}
@@ -189,7 +189,7 @@ export default function BrandPage() {
               <div className="md:w-1/2 relative p-10 flex items-center justify-center">
                 <span className="absolute top-0 left-0 text-[11px] text-white bg-primary-navy px-3 py-1.5">더샵 시그니처</span>
                 <Image
-                  src="/images/business/brand_logo.jpg"
+                  src="/images/business/brand_logo.webp"
                   alt="더샵 브랜드 로고"
                   width={400}
                   height={400}

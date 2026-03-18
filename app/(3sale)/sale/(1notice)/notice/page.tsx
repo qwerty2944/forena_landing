@@ -13,7 +13,7 @@ export default function NoticePage() {
     <>
       <SubPageHero
         title="모집공고"
-        backgroundImage="/images/sale/hero.jpg"
+        backgroundImage="/images/sale/hero.webp"
         breadcrumb={[
           { label: 'HOME', href: '/' },
           { label: '분양안내', href: '/sale/calendar' },
@@ -24,7 +24,7 @@ export default function NoticePage() {
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         {/* 건물 이미지 */}
         <Image
-          src="/images/sale/recruitment-notice.jpg"
+          src="/images/sale/recruitment-notice.webp"
           alt="모집공고"
           width={1000}
           height={600}
@@ -42,7 +42,7 @@ export default function NoticePage() {
             {/* 왼쪽: txt1 */}
             <div className="flex-1">
               <Image
-                src="/images/sale/notice-text-1.jpg"
+                src="/images/sale/notice-text-1.webp"
                 alt="아크로벳 리더 설명"
                 width={500}
                 height={300}
@@ -57,7 +57,7 @@ export default function NoticePage() {
             {/* 오른쪽: txt2 + 버튼 */}
             <div className="flex-1">
               <Image
-                src="/images/sale/notice-text-2.jpg"
+                src="/images/sale/notice-text-2.webp"
                 alt="Adobe Acrobat Reader 안내"
                 width={500}
                 height={300}

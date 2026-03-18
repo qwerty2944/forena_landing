@@ -13,7 +13,7 @@ export default function CalendarPage() {
     <>
       <SubPageHero
         title="분양일정"
-        backgroundImage="/images/sale/hero.jpg"
+        backgroundImage="/images/sale/hero.webp"
         breadcrumb={[
           { label: 'HOME', href: '/' },
           { label: '분양안내', href: '/sale/calendar' },
@@ -23,7 +23,7 @@ export default function CalendarPage() {
 
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         <Image
-          src="/images/sale/schedule.jpg"
+          src="/images/sale/schedule.webp"
           alt="분양일정"
           width={1000}
           height={700}

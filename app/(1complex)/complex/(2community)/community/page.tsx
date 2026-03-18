@@ -19,12 +19,12 @@ export default function CommunityPage() {
     <>
       <SubPageHero
         title="커뮤니티"
-        backgroundImage="/images/complex/hero.jpg"
+        backgroundImage="/images/complex/hero.webp"
         breadcrumb={BREADCRUMB}
       />
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         <Image
-          src="/images/complex/community.jpg"
+          src="/images/complex/community.webp"
           alt="커뮤니티 시설"
           width={1000}
           height={700}

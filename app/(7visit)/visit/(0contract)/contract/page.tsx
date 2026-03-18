@@ -21,7 +21,7 @@ export default function ContractVisitPage() {
     <>
       <SubPageHero
         title="정당 서류접수 방문예약"
-        backgroundImage="/images/visit/hero.jpg"
+        backgroundImage="/images/visit/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '방문예약', href: '/visit' },
@@ -32,7 +32,7 @@ export default function ContractVisitPage() {
       <div className="max-w-[800px] mx-auto px-[20px] py-[60px]">
         {/* Top Banner Image */}
         <Image
-          src="/images/visit/contract-banner.jpg"
+          src="/images/visit/contract-banner.webp"
           alt="정당계약 서류접수 방문예약"
           width={1000}
           height={400}

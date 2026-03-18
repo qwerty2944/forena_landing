@@ -10,8 +10,8 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 const YOUTUBE_VIDEO_ID = 'ZjXNsFlcb88';
 
 const IMAGE_POPUPS = [
-  { id: 'popup1', src: '/images/main/popup-1.jpg', alt: '무순위 청약일정 안내' },
-  { id: 'popup2', src: '/images/main/popup-2.jpg', alt: '유사 홈페이지 주의' },
+  { id: 'popup1', src: '/images/main/popup-1.webp', alt: '무순위 청약일정 안내' },
+  { id: 'popup2', src: '/images/main/popup-2.webp', alt: '유사 홈페이지 주의' },
 ];
 
 type Phase = 'video' | 'popups' | 'closed';

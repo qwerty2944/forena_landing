@@ -13,7 +13,7 @@ export default function CheckpointPage() {
     <>
       <SubPageHero
         title="청약체크포인트"
-        backgroundImage="/images/subscription/hero.jpg"
+        backgroundImage="/images/subscription/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '청약안내', href: '/subscription/guide' },
@@ -23,7 +23,7 @@ export default function CheckpointPage() {
 
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         <Image
-          src="/images/subscription/checkpoint.jpg"
+          src="/images/subscription/checkpoint.webp"
           alt="청약체크포인트"
           width={1000}
           height={1400}

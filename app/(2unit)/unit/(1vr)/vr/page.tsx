@@ -5,7 +5,7 @@ export default function VRPage() {
     <>
       <SubPageHero
         title="E모델하우스"
-        backgroundImage="/images/unit/hero.jpg"
+        backgroundImage="/images/unit/hero.webp"
         breadcrumb={[
           { label: 'HOME', href: '/' },
           { label: '세대안내', href: '/unit/floor-plan' },

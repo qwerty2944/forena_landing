@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="flex items-center justify-between flex-wrap gap-y-4">
           <div className="flex items-center gap-[25px] flex-wrap">
             <Image
-              src="/images/main/forena-logo.jpg"
+              src="/images/main/forena-logo.webp"
               alt="FORENA"
               width={140}
               height={30}
@@ -24,7 +24,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-[8px]">
               <span className="text-[12px] text-[#777]">시공</span>
-              <Image src="/images/main/hanwha-icon.png" alt="(주)한화 건설부문" width={130} height={24} className="h-[22px] w-auto" />
+              <Image src="/images/main/hanwha-icon.webp" alt="(주)한화 건설부문" width={130} height={24} className="h-[22px] w-auto" />
             </div>
           </div>
 
@@ -90,7 +90,7 @@ export default function Footer() {
       <div className="md:hidden px-[20px] py-[40px] text-center">
         {/* FORENA 로고 */}
         <Image
-          src="/images/main/forena-logo.jpg"
+          src="/images/main/forena-logo.webp"
           alt="FORENA"
           width={160}
           height={34}
@@ -105,7 +105,7 @@ export default function Footer() {
         {/* 시공 로고 */}
         <div className="flex items-center justify-center gap-[8px] mt-[12px]">
           <span className="text-[12px] text-[#777]">시공 -</span>
-          <Image src="/images/main/hanwha-icon.png" alt="(주)한화 건설부문" width={130} height={24} className="h-[20px] w-auto" />
+          <Image src="/images/main/hanwha-icon.webp" alt="(주)한화 건설부문" width={130} height={24} className="h-[20px] w-auto" />
         </div>
 
         {/* 대표전화 */}

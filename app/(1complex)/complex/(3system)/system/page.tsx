@@ -19,12 +19,12 @@ export default function SystemPage() {
     <>
       <SubPageHero
         title="시스템"
-        backgroundImage="/images/complex/hero.jpg"
+        backgroundImage="/images/complex/hero.webp"
         breadcrumb={BREADCRUMB}
       />
       <div className="max-w-[1000px] mx-auto px-[20px] py-[60px]">
         <Image
-          src="/images/complex/system.jpg"
+          src="/images/complex/system.webp"
           alt="시스템"
           width={1000}
           height={700}

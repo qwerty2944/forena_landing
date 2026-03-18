@@ -189,7 +189,7 @@ export default function NewsPage() {
     <>
       <SubPageHero
         title="보도자료"
-        backgroundImage="/images/subscription/hero.jpg"
+        backgroundImage="/images/subscription/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '홍보센터', href: '/media/news' },

@@ -41,7 +41,7 @@ export default function Header() {
             <div className="px-[16px] h-full flex items-center justify-between">
               <Link href="/" aria-label="FORENA THE SHOP home page">
                 <Image
-                  src="/images/main/top_logo.png"
+                  src="/images/main/top_logo.webp"
                   alt="FORENA THE SHOP 인천시청역"
                   width={253}
                   height={21}
@@ -79,7 +79,7 @@ export default function Header() {
                 aria-label="FORENA THE SHOP home page"
               >
                 <Image
-                  src="/images/main/top_logo_wh.png"
+                  src="/images/main/top_logo_wh.webp"
                   alt="FORENA THE SHOP 인천시청역"
                   width={253}
                   height={21}

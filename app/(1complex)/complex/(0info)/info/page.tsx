@@ -5,10 +5,10 @@ import Image from 'next/image';
 import SubPageHero from '@/components/sections/SubPageHero';
 
 const TABS = [
-  { label: '조감도', image: '/images/complex/complex01.jpg' },
-  { label: '투시도', image: '/images/complex/complex02.jpg' },
-  { label: '단지배치도', image: '/images/complex/complex03.jpg' },
-  { label: '동·호수배치도', image: '/images/complex/complex04.jpg' },
+  { label: '조감도', image: '/images/complex/complex01.webp' },
+  { label: '투시도', image: '/images/complex/complex02.webp' },
+  { label: '단지배치도', image: '/images/complex/complex03.webp' },
+  { label: '동·호수배치도', image: '/images/complex/complex04.webp' },
 ];
 
 export default function ComplexInfoPage() {
@@ -18,7 +18,7 @@ export default function ComplexInfoPage() {
     <>
       <SubPageHero
         title="단지정보"
-        backgroundImage="/images/complex/hero.jpg"
+        backgroundImage="/images/complex/hero.webp"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: '단지안내', href: '/complex/info' },
