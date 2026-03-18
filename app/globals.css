@@ -65,22 +65,38 @@
   }
 }
 
-/* Custom scrollbar */
+/* Auto-hide scrollbar: only visible while scrolling */
+html {
+  scrollbar-width: none; /* Firefox: hide by default */
+  overflow-y: scroll;
+}
+
+html.is-scrolling {
+  scrollbar-width: thin; /* Firefox: show while scrolling */
+  scrollbar-color: rgba(153,153,153,0.6) transparent;
+}
+
+/* Webkit (Chrome/Safari/Edge): hide scrollbar by default */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0;
+  background: transparent;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+html.is-scrolling::-webkit-scrollbar {
+  width: 6px;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #999;
-  border-radius: 4px;
+html.is-scrolling::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #666;
+html.is-scrolling::-webkit-scrollbar-thumb {
+  background: rgba(153,153,153,0.6);
+  border-radius: 3px;
+}
+
+html.is-scrolling::-webkit-scrollbar-thumb:hover {
+  background: rgba(102,102,102,0.8);
 }
 
 /* Swiper custom styles */

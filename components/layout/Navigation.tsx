@@ -64,14 +64,19 @@ export default function Navigation({ isScrolled }: NavigationProps) {
         ))}
       </ul>
 
-      {/* Phone number */}
-      <a
-        href={`tel:${CONTACT.phone}`}
-        className="text-white font-semibold leading-none hover:text-accent-green transition-colors ml-auto shrink-0"
-        style={{ fontFamily: 'arial, sans-serif', fontSize: '24px' }}
-      >
-        {CONTACT.phone}
-      </a>
+      {/* Phone number + Grand Open */}
+      <div className="flex items-center gap-5 ml-auto shrink-0">
+        <a
+          href={`tel:${CONTACT.phone}`}
+          className="text-white font-semibold leading-none hover:text-accent-green transition-colors"
+          style={{ fontFamily: 'arial, sans-serif', fontSize: '24px' }}
+        >
+          {CONTACT.phone}
+        </a>
+        <span className="text-white text-[15px] tracking-[0.05em] border border-white/60 rounded-full px-5 py-2 leading-none">
+          2월 6일 GRAND OPEN
+        </span>
+      </div>
 
       {/* Dropdown mega menu - ALL submenus shown, aligned under parent */}
       <AnimatePresence>

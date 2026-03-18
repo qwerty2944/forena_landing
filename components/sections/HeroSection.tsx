@@ -39,8 +39,8 @@ export default function HeroSection() {
                   src={slide.src}
                   alt={`메인 슬라이드 ${slide.id}`}
                   fill
-                  className={`object-cover transition-transform duration-[5500ms] ease-out ${
-                    activeIndex === index ? 'scale-100' : 'scale-[1.15]'
+                  className={`object-cover transition-transform duration-[8000ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                    activeIndex === index ? 'scale-100' : 'scale-[1.12]'
                   }`}
                   priority={slide.id === 1}
                   sizes="100vw"
@@ -66,8 +66,9 @@ export default function HeroSection() {
               <h2 className="text-white text-[20px] md:text-[48px] font-bold tracking-[-0.5px] leading-tight">
                 포레나더샵 인천시청역
               </h2>
+              <div className="h-[14px] md:h-[28px]" />
               <p
-                className="text-white/50 text-[16px] md:text-[30px] mt-[6px] md:mt-[14px] font-light"
+                className="text-[#8b8075] text-[16px] md:text-[30px] mt-[14px] md:mt-[28px] font-light"
                 style={{ fontFamily: 'arial, sans-serif' }}
               >
                 {CONTACT.phone}

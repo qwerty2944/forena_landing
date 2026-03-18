@@ -13,12 +13,12 @@ export default function VRPage() {
         ]}
       />
 
-      <div className="max-w-[1200px] mx-auto px-5 py-10">
+      {/* 모바일: 반응형 / md 이상: 1200x800 고정 */}
+      <div className="py-10 md:overflow-x-auto">
         <iframe
           src="https://sws360.com/2026/jpl/forena-incheon_emodel/index.htm"
           title="E모델하우스"
-          className="w-full border-0"
-          style={{ height: 'calc(100vh - 200px)', minHeight: '600px' }}
+          className="mx-auto border-0 w-full aspect-[3/2] md:w-[1200px] md:h-[800px] md:aspect-auto"
           allowFullScreen
         />
       </div>

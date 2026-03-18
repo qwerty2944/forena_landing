@@ -10,7 +10,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 const YOUTUBE_VIDEO_ID = 'ZjXNsFlcb88';
 
 const IMAGE_POPUPS = [
-  { id: 'popup1', src: '/images/main/popup-1.webp', alt: '무순위 청약일정 안내' },
+  // { id: 'popup1', src: '/images/main/popup-1.webp', alt: '무순위 청약일정 안내' },
   { id: 'popup2', src: '/images/main/popup-2.webp', alt: '유사 홈페이지 주의' },
 ];
 
@@ -130,133 +130,16 @@ export default function PopupBanner() {
           </div>
 
           <div className="relative z-10">
-            {/* Desktop: 두 개 나란히 */}
-            <div className="hidden md:flex items-stretch gap-[16px]">
-              {/* Left popup */}
-              <div className="w-[340px] max-w-[42vw] flex flex-col">
-                <div className="shrink-0 overflow-hidden">
-                  <Image
-                    src={IMAGE_POPUPS[0].src}
-                    alt={IMAGE_POPUPS[0].alt}
-                    width={340}
-                    height={500}
-                    className="w-full h-auto"
-                    priority
-                  />
-                </div>
-                <div className="flex flex-col flex-1">
-                  <a
-                    href="https://incheon.forena.co.kr/data/m_gongo.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-between px-[16px] bg-[#777] text-white text-[14px] font-medium hover:bg-[#666] transition-colors"
-                  >
-                    <span>무순위 공고 바로가기</span>
-                    <span className="w-[32px] h-[32px] rounded-full bg-white/90 flex items-center justify-center shrink-0">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2.5L9.5 7L5 11.5" stroke="#555" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </a>
-                  <a
-                    href="https://www.applyhome.co.kr/co/coa/selectMainView.do"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-between px-[16px] bg-[#444] text-white text-[14px] font-medium hover:bg-[#333] transition-colors"
-                  >
-                    <span>무순위 청약하러 가기</span>
-                    <span className="w-[32px] h-[32px] rounded-full bg-white/90 flex items-center justify-center shrink-0">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2.5L9.5 7L5 11.5" stroke="#555" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </a>
-                </div>
-              </div>
-
-              {/* Right popup */}
-              <div className="w-[340px] max-w-[42vw]">
-                <Image
-                  src={IMAGE_POPUPS[1].src}
-                  alt={IMAGE_POPUPS[1].alt}
-                  width={340}
-                  height={500}
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* Mobile: 1개씩 자동 캐러셀 — 고정 높이로 레이아웃 시프트 방지 */}
-            <div className="md:hidden w-[72vw] max-w-[300px] overflow-hidden mt-[40px]">
-              {/* 이미지 비율 + 버튼 2개 높이를 합친 고정 컨테이너 */}
-              <div className="relative" style={{ aspectRatio: '340 / 588' }}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeSlide}
-                    initial={{ opacity: 0, x: 60 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -60 }}
-                    transition={{ duration: 0.35 }}
-                    className="absolute inset-0 flex flex-col"
-                  >
-                    {activeSlide === 0 ? (
-                      <>
-                        <div className="flex-1 overflow-hidden">
-                          <Image
-                            src={IMAGE_POPUPS[0].src}
-                            alt={IMAGE_POPUPS[0].alt}
-                            width={340}
-                            height={500}
-                            className="w-full h-full object-cover"
-                            priority
-                          />
-                        </div>
-                        <a
-                          href="https://incheon.forena.co.kr/data/m_gongo.pdf"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-between px-[16px] py-[14px] bg-[#777] text-white text-[14px] font-medium shrink-0"
-                        >
-                          <span>무순위 공고 바로가기</span>
-                          <span className="w-[32px] h-[32px] rounded-full bg-white/90 flex items-center justify-center shrink-0">
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2.5L9.5 7L5 11.5" stroke="#555" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                          </span>
-                        </a>
-                        <a
-                          href="https://www.applyhome.co.kr/co/coa/selectMainView.do"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-between px-[16px] py-[14px] bg-[#444] text-white text-[14px] font-medium shrink-0"
-                        >
-                          <span>무순위 청약하러 가기</span>
-                          <span className="w-[32px] h-[32px] rounded-full bg-white/90 flex items-center justify-center shrink-0">
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2.5L9.5 7L5 11.5" stroke="#555" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                          </span>
-                        </a>
-                      </>
-                    ) : (
-                      <Image
-                        src={IMAGE_POPUPS[1].src}
-                        alt={IMAGE_POPUPS[1].alt}
-                        width={340}
-                        height={588}
-                        className="w-full h-full object-cover"
-                        priority
-                      />
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* 인디케이터 dots */}
-              <div className="flex justify-center gap-[8px] mt-[12px]">
-                {IMAGE_POPUPS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveSlide(i)}
-                    className={`w-[8px] h-[8px] rounded-full transition-colors ${
-                      i === activeSlide ? 'bg-white' : 'bg-white/40'
-                    }`}
-                  />
-                ))}
-              </div>
+            {/* 팝업 이미지 1개 */}
+            <div className="w-[340px] max-w-[80vw]">
+              <Image
+                src={IMAGE_POPUPS[0].src}
+                alt={IMAGE_POPUPS[0].alt}
+                width={340}
+                height={500}
+                className="w-full h-auto"
+                priority
+              />
             </div>
 
             {/* 오늘 하루동안 보지 않기 */}

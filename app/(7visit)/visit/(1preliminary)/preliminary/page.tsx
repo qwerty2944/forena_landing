@@ -40,25 +40,6 @@ export default function PreliminaryVisitPage() {
           priority
         />
 
-        {/* Info Table */}
-        <div className="border-t-2 border-[#333]">
-          {[
-            { label: '방법', value: '홈페이지 온라인 예약' },
-            { label: '예약기간', value: '2026. 02. 21(토) ~02. 27(금)' },
-            { label: '방문기간', value: '2026. 02. 24(화) ~02. 27(금)' },
-            { label: '장소', value: '인천광역시 남동구 구월동 1140-1번지' },
-          ].map((row) => (
-            <div key={row.label} className="flex border-b border-[#ddd]">
-              <div className="w-[130px] shrink-0 bg-[#f5f5f5] flex items-center justify-center py-3 text-[13px] font-medium text-[#333] border-r border-[#ddd]">
-                {row.label}
-              </div>
-              <div className="flex-1 py-3 px-4 text-[13px] text-[#555]">
-                {row.value}
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Tabs */}
         <div className="flex mt-10">
           <button

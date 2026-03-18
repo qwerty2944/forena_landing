@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { supabase } from '@/lib/supabase';
 
 const PRIVACY_TEXT = `'상인천초교주변구역재개발조합'(이하 '회사')은 고객님의 개인정보를 중요시하며, "개인정보보호법" 및 "정보통신망 이용촉진 및 정보보호 등에 관한 법률" 등 관련 법령을 준수하고 있습니다. '회사'는 개인정보취급방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다. '회사'는 개인정보취급방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.
 
@@ -31,7 +32,20 @@ const CONSIGNMENT_DATA = [
   { target: '(주)씨엘케이', task: '분양마케팅업무대행', info: '이름, 핸드폰번호, 주소, 관심평형' },
 ];
 
-const SIDO = ['시/도 선택', '서울특별시', '부산광역시', '대구광역시', '인천광역시', '광주광역시', '대전광역시', '울산광역시', '세종특별자치시', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주특별자치도'];
+const REGCODE_API = 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes';
+
+interface RegCode {
+  code: string;
+  name: string;
+}
+
+async function fetchRegcodes(pattern: string, ignoreZero = false): Promise<RegCode[]> {
+  const params = new URLSearchParams({ regcode_pattern: pattern });
+  if (ignoreZero) params.set('is_ignore_zero', 'true');
+  const res = await fetch(`${REGCODE_API}?${params}`);
+  const data = await res.json();
+  return data.regcodes ?? [];
+}
 
 export default function InterestRegisterPage() {
   const [privacyOpen, setPrivacyOpen] = useState(true);
@@ -39,7 +53,65 @@ export default function InterestRegisterPage() {
   const [allAgree, setAllAgree] = useState(false);
   const [agree1, setAgree1] = useState<'yes' | 'no'>('no');
   const [agree2, setAgree2] = useState<'yes' | 'no'>('no');
-  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [name, setName] = useState('');
+  const [phonePre, setPhonePre] = useState('010');
+  const [phoneMid, setPhoneMid] = useState('');
+  const [phoneLast, setPhoneLast] = useState('');
+  const [unitType, setUnitType] = useState('');
+
+  // 주소 드롭다운
+  const [sidoList, setSidoList] = useState<RegCode[]>([]);
+  const [sigunguList, setSigunguList] = useState<RegCode[]>([]);
+  const [dongList, setDongList] = useState<RegCode[]>([]);
+
+  const [sidoCode, setSidoCode] = useState('');
+  const [sigunguCode, setSigunguCode] = useState('');
+  const [dongCode, setDongCode] = useState('');
+
+  const [sidoName, setSidoName] = useState('');
+  const [sigunguName, setSigunguName] = useState('');
+  const [dongName, setDongName] = useState('');
+
+  // 시도 목록 로드
+  useEffect(() => {
+    fetchRegcodes('*00000000').then(setSidoList);
+  }, []);
+
+  // 시군구 목록 로드
+  const handleSidoChange = useCallback((code: string, name: string) => {
+    setSidoCode(code);
+    setSidoName(name);
+    setSigunguCode('');
+    setSigunguName('');
+    setDongCode('');
+    setDongName('');
+    setSigunguList([]);
+    setDongList([]);
+    if (code) {
+      const prefix = code.substring(0, 2);
+      fetchRegcodes(`${prefix}*00000`, true).then(setSigunguList);
+    }
+  }, []);
+
+  // 읍면동 목록 로드
+  const handleSigunguChange = useCallback((code: string, name: string) => {
+    setSigunguCode(code);
+    setSigunguName(name);
+    setDongCode('');
+    setDongName('');
+    setDongList([]);
+    if (code) {
+      const prefix = code.substring(0, 5);
+      fetchRegcodes(`${prefix}*`, true).then(setDongList);
+    }
+  }, []);
+
+  const handleDongChange = useCallback((code: string, name: string) => {
+    setDongCode(code);
+    setDongName(name);
+  }, []);
 
   const handleAllAgree = (checked: boolean) => {
     setAllAgree(checked);
@@ -52,34 +124,40 @@ export default function InterestRegisterPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (agree1 !== 'yes' || agree2 !== 'yes') {
-      alert('필수 항목에 동의해 주세요.');
+      alert('필수 항목 수집 및 이용에 대하여 동의해주세요.');
       return;
     }
-    setSubmitted(true);
+
+    setLoading(true);
+
+    const phone = `${phonePre}-${phoneMid}-${phoneLast}`;
+
+    const { error } = await supabase.from('interested_customers').insert({
+      name,
+      phone,
+      sido: sidoName,
+      sigungu: sigunguName || null,
+      dong: dongName || null,
+      unit_type: unitType,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      alert('등록 중 오류가 발생했습니다. 다시 시도해주세요.');
+      return;
+    }
+
+    alert('등록하였습니다.');
+    window.close();
   };
 
-  if (submitted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="text-center">
-          <p className="text-[18px] font-bold text-[#333] mb-4">관심고객 등록이 완료되었습니다.</p>
-          <p className="text-[14px] text-[#888] mb-8">감사합니다.</p>
-          <button
-            onClick={() => window.close()}
-            className="px-8 py-3 bg-[#1a3a6b] text-white text-[14px] font-medium hover:bg-[#15305a] transition-colors"
-          >
-            창 닫기
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: "'Noto Sans KR', sans-serif" }}>
+    <div className="min-h-screen bg-white overflow-x-hidden" style={{ fontFamily: "'Noto Sans KR', sans-serif" }}>
       {/* Header */}
       <div className="bg-[#1a3a6b] py-[25px] text-center">
         <h1 className="text-[22px] md:text-[26px] font-bold text-white tracking-[-0.5px]">
@@ -120,12 +198,12 @@ export default function InterestRegisterPage() {
         </div>
 
         {/* 동의 라디오 1 */}
-        <div className="flex items-start justify-between px-2 py-3 border-b border-[#eee] mb-1">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between px-2 py-3 border-b border-[#eee] mb-1 gap-2">
           <div>
             <p className="text-[13px] text-[#555]">필수 항목 수집 및 이용에 대하여 동의하십니까?</p>
             <p className="text-[12px] text-[#999]">(* 미동의 시 더 이상 관심고객등록을 진행하실 수 없습니다.)</p>
           </div>
-          <div className="flex items-center gap-4 shrink-0 ml-4">
+          <div className="flex items-center gap-4 shrink-0">
             <label className="flex items-center gap-1.5 cursor-pointer">
               <input type="radio" name="agree1" checked={agree1 === 'yes'} onChange={() => setAgree1('yes')} className="w-[16px] h-[16px] accent-[#1a3a6b]" />
               <span className="text-[13px] text-[#555]">동의함</span>
@@ -138,12 +216,12 @@ export default function InterestRegisterPage() {
         </div>
 
         {/* 동의 라디오 2 */}
-        <div className="flex items-start justify-between px-2 py-3 border-b border-[#eee] mb-4">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between px-2 py-3 border-b border-[#eee] mb-4 gap-2">
           <div>
             <p className="text-[13px] text-[#555]">필수 항목의 마케팅 목적의 활용에 대하여 동의하십니까?</p>
             <p className="text-[12px] text-[#999]">(* 미동의 시 더 이상 관심고객등록을 진행하실 수 없습니다.)</p>
           </div>
-          <div className="flex items-center gap-4 shrink-0 ml-4">
+          <div className="flex items-center gap-4 shrink-0">
             <label className="flex items-center gap-1.5 cursor-pointer">
               <input type="radio" name="agree2" checked={agree2 === 'yes'} onChange={() => setAgree2('yes')} className="w-[16px] h-[16px] accent-[#1a3a6b]" />
               <span className="text-[13px] text-[#555]">동의함</span>
@@ -169,24 +247,26 @@ export default function InterestRegisterPage() {
           {consignOpen && (
             <div className="px-5 py-4 border-t border-[#eee]">
               <p className="text-[13px] text-[#333] font-medium mb-3">회사는 원활한 업무 진행 및 서비스 이행을 위해 아래와 같이 외부 전문 업체에 위탁하여 운영하고 있습니다.</p>
-              <table className="w-full border-collapse text-[12px]">
-                <thead>
-                  <tr className="bg-[#f5f5f5]">
-                    <th className="border border-[#ddd] px-3 py-2 text-left font-medium text-[#333]">위탁 대상자</th>
-                    <th className="border border-[#ddd] px-3 py-2 text-left font-medium text-[#333]">위탁업무내용</th>
-                    <th className="border border-[#ddd] px-3 py-2 text-left font-medium text-[#333]">위탁하는 개인정보 항목</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {CONSIGNMENT_DATA.map((row, i) => (
-                    <tr key={i}>
-                      <td className="border border-[#ddd] px-3 py-2 text-[#555]">{row.target}</td>
-                      <td className="border border-[#ddd] px-3 py-2 text-[#555]">{row.task}</td>
-                      <td className="border border-[#ddd] px-3 py-2 text-[#555]">{row.info}</td>
+              <div className="overflow-x-auto -mx-5 px-5">
+                <table className="w-full border-collapse text-[12px] min-w-[480px]">
+                  <thead>
+                    <tr className="bg-[#f5f5f5]">
+                      <th className="border border-[#ddd] px-3 py-2 text-left font-medium text-[#333]">위탁 대상자</th>
+                      <th className="border border-[#ddd] px-3 py-2 text-left font-medium text-[#333]">위탁업무내용</th>
+                      <th className="border border-[#ddd] px-3 py-2 text-left font-medium text-[#333]">위탁하는 개인정보 항목</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {CONSIGNMENT_DATA.map((row, i) => (
+                      <tr key={i}>
+                        <td className="border border-[#ddd] px-3 py-2 text-[#555]">{row.target}</td>
+                        <td className="border border-[#ddd] px-3 py-2 text-[#555]">{row.task}</td>
+                        <td className="border border-[#ddd] px-3 py-2 text-[#555]">{row.info}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <div className="mt-3 text-[12px] text-[#333] font-medium leading-[1.8]">
                 <p>※만14세 이상인 고객님에 한하여 관심고객 등록이 가능합니다.</p>
                 <p>※관심고객 등록을 하시는 경우 회사는 고객님이 만14세 이상인 것으로 간주하며, 만약 이와 사실이 다른 경우 회사는 고객님의 관심고객 등록을 삭제할 수 있습니다.</p>
@@ -205,74 +285,133 @@ export default function InterestRegisterPage() {
         <form onSubmit={handleSubmit}>
           <div className="border-t-2 border-[#1a3a6b]">
             {/* 성명 */}
-            <div className="flex items-center border-b border-[#eee] py-4">
-              <label className="w-[120px] shrink-0 text-[14px] text-[#333] pl-2">
-                <span className="text-red-500">*</span> 성명
+            <div className="flex border-b border-[#ddd]">
+              <label className="w-[120px] shrink-0 flex items-center text-[14px] text-[#333] font-medium pl-4 bg-[#f5f5f5] border-r border-[#ddd]">
+                <span className="text-red-500 mr-0.5">*</span>성명
               </label>
-              <input
-                type="text"
-                required
-                className="w-[200px] px-3 py-2 border border-[#ccc] text-[14px] focus:outline-none focus:border-[#333]"
-              />
+              <div className="flex-1 px-4 py-3">
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full max-w-[300px] px-3 py-2 border border-[#ccc] text-[14px] focus:outline-none focus:border-[#333]"
+                />
+              </div>
             </div>
 
             {/* 핸드폰 번호 */}
-            <div className="flex items-center border-b border-[#eee] py-4">
-              <label className="w-[120px] shrink-0 text-[14px] text-[#333] pl-2">
-                <span className="text-red-500">*</span> 핸드폰 번호
+            <div className="flex border-b border-[#ddd]">
+              <label className="w-[120px] shrink-0 flex items-center text-[14px] text-[#333] font-medium pl-4 bg-[#f5f5f5] border-r border-[#ddd]">
+                <span className="text-red-500 mr-0.5">*</span>핸드폰 번호
               </label>
-              <div className="flex items-center gap-1.5">
-                <select className="w-[80px] px-2 py-2 border border-[#ccc] text-[14px] bg-white focus:outline-none">
-                  <option>010</option>
-                  <option>011</option>
-                  <option>016</option>
-                  <option>017</option>
-                </select>
-                <span className="text-[#999]">-</span>
-                <input type="text" required maxLength={4} className="w-[90px] px-3 py-2 border border-[#ccc] text-[14px] focus:outline-none focus:border-[#333]" />
-                <span className="text-[#999]">-</span>
-                <input type="text" required maxLength={4} className="w-[90px] px-3 py-2 border border-[#ccc] text-[14px] focus:outline-none focus:border-[#333]" />
+              <div className="flex-1 px-4 py-3">
+                <div className="flex items-center gap-1.5">
+                  <select
+                    value={phonePre}
+                    onChange={(e) => setPhonePre(e.target.value)}
+                    className="w-[72px] px-2 py-2 border border-[#ccc] text-[14px] bg-white focus:outline-none"
+                  >
+                    <option>010</option>
+                    <option>011</option>
+                    <option>016</option>
+                    <option>017</option>
+                  </select>
+                  <span className="text-[#999]">-</span>
+                  <input
+                    type="text"
+                    required
+                    maxLength={4}
+                    value={phoneMid}
+                    onChange={(e) => setPhoneMid(e.target.value.replace(/\D/g, ''))}
+                    className="w-[100px] px-3 py-2 border border-[#ccc] text-[14px] focus:outline-none focus:border-[#333]"
+                  />
+                  <span className="text-[#999]">-</span>
+                  <input
+                    type="text"
+                    required
+                    maxLength={4}
+                    value={phoneLast}
+                    onChange={(e) => setPhoneLast(e.target.value.replace(/\D/g, ''))}
+                    className="w-[100px] px-3 py-2 border border-[#ccc] text-[14px] focus:outline-none focus:border-[#333]"
+                  />
+                </div>
               </div>
             </div>
 
             {/* 주소 */}
-            <div className="flex items-center border-b border-[#eee] py-4">
-              <label className="w-[120px] shrink-0 text-[14px] text-[#333] pl-2">
-                <span className="text-red-500">*</span> 주소
+            <div className="flex border-b border-[#ddd]">
+              <label className="w-[120px] shrink-0 flex items-center text-[14px] text-[#333] font-medium pl-4 bg-[#f5f5f5] border-r border-[#ddd]">
+                <span className="text-red-500 mr-0.5">*</span>주소
               </label>
-              <div className="flex items-center gap-2">
-                <select required className="px-2 py-2 border border-[#ccc] text-[14px] bg-white focus:outline-none min-w-[130px]">
-                  {SIDO.map((s) => (
-                    <option key={s} value={s === '시/도 선택' ? '' : s}>{s}</option>
-                  ))}
-                </select>
-                <select className="px-2 py-2 border border-[#ccc] text-[14px] bg-white focus:outline-none min-w-[130px]">
-                  <option value="">시/구/군 선택</option>
-                </select>
-                <select className="px-2 py-2 border border-[#ccc] text-[14px] bg-white focus:outline-none min-w-[130px]">
-                  <option value="">동/읍/면 선택</option>
-                </select>
+              <div className="flex-1 px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <select
+                    required
+                    value={sidoCode}
+                    onChange={(e) => {
+                      const selected = sidoList.find((s) => s.code === e.target.value);
+                      handleSidoChange(e.target.value, selected?.name ?? '');
+                    }}
+                    className="flex-1 min-w-0 px-3 py-2 border border-[#ccc] text-[14px] bg-white focus:outline-none"
+                  >
+                    <option value="">시/도 선택</option>
+                    {sidoList.map((s) => (
+                      <option key={s.code} value={s.code}>{s.name}</option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={sigunguCode}
+                    onChange={(e) => {
+                      const selected = sigunguList.find((s) => s.code === e.target.value);
+                      handleSigunguChange(e.target.value, selected?.name ?? '');
+                    }}
+                    className="flex-1 min-w-0 px-3 py-2 border border-[#ccc] text-[14px] bg-white focus:outline-none"
+                  >
+                    <option value="">시/구/군 선택</option>
+                    {sigunguList.map((s) => (
+                      <option key={s.code} value={s.code}>{s.name}</option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={dongCode}
+                    onChange={(e) => {
+                      const selected = dongList.find((s) => s.code === e.target.value);
+                      handleDongChange(e.target.value, selected?.name ?? '');
+                    }}
+                    className="flex-1 min-w-0 px-3 py-2 border border-[#ccc] text-[14px] bg-white focus:outline-none"
+                  >
+                    <option value="">동/읍/면 선택</option>
+                    {dongList.map((s) => (
+                      <option key={s.code} value={s.code}>{s.name}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
 
             {/* 주택형 */}
-            <div className="flex items-center border-b border-[#eee] py-4">
-              <label className="w-[120px] shrink-0 text-[14px] text-[#333] pl-2">
-                <span className="text-red-500">*</span> 주택형
+            <div className="flex border-b border-[#ddd]">
+              <label className="w-[120px] shrink-0 flex items-center text-[14px] text-[#333] font-medium pl-4 bg-[#f5f5f5] border-r border-[#ddd]">
+                <span className="text-red-500 mr-0.5">*</span>주택형
               </label>
-              <div className="flex items-center gap-5">
-                <label className="flex items-center gap-1.5 cursor-pointer">
-                  <input type="radio" name="unitType" value="49A" required className="w-[16px] h-[16px] accent-[#333]" />
-                  <span className="text-[14px] text-[#555]">49㎡A</span>
-                </label>
-                <label className="flex items-center gap-1.5 cursor-pointer">
-                  <input type="radio" name="unitType" value="59A" className="w-[16px] h-[16px] accent-[#333]" />
-                  <span className="text-[14px] text-[#555]">59㎡A</span>
-                </label>
-                <label className="flex items-center gap-1.5 cursor-pointer">
-                  <input type="radio" name="unitType" value="59B" className="w-[16px] h-[16px] accent-[#333]" />
-                  <span className="text-[14px] text-[#555]">59㎡B</span>
-                </label>
+              <div className="flex-1 px-4 py-3">
+                <div className="flex items-center gap-5">
+                  <label className="flex items-center gap-1.5 cursor-pointer">
+                    <input type="radio" name="unitType" value="49A" required checked={unitType === '49A'} onChange={(e) => setUnitType(e.target.value)} className="w-[16px] h-[16px] accent-[#333]" />
+                    <span className="text-[14px] text-[#555]">49㎡A</span>
+                  </label>
+                  <label className="flex items-center gap-1.5 cursor-pointer">
+                    <input type="radio" name="unitType" value="59A" checked={unitType === '59A'} onChange={(e) => setUnitType(e.target.value)} className="w-[16px] h-[16px] accent-[#333]" />
+                    <span className="text-[14px] text-[#555]">59㎡A</span>
+                  </label>
+                  <label className="flex items-center gap-1.5 cursor-pointer">
+                    <input type="radio" name="unitType" value="59B" checked={unitType === '59B'} onChange={(e) => setUnitType(e.target.value)} className="w-[16px] h-[16px] accent-[#333]" />
+                    <span className="text-[14px] text-[#555]">59㎡B</span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -285,9 +424,10 @@ export default function InterestRegisterPage() {
           <div className="flex justify-center gap-2 mb-10">
             <button
               type="submit"
-              className="w-[140px] py-3.5 bg-[#1a3a6b] text-white text-[15px] font-medium hover:bg-[#15305a] transition-colors"
+              disabled={loading}
+              className="w-[140px] py-3.5 bg-[#1a3a6b] text-white text-[15px] font-medium hover:bg-[#15305a] transition-colors disabled:opacity-50"
             >
-              등록
+              {loading ? '등록 중...' : '등록'}
             </button>
             <button
               type="button"
