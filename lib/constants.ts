@@ -1,6 +1,8 @@
 export const SITE_NAME = '포레나더샵 인천시청역';
 export const SITE_DESCRIPTION = '포레나더샵 인천시청역 - 인천의 새로운 랜드마크';
 
+export const KAKAO_MAP_KEY = '8e06cbb6daf30d17b0c10c1d5a7f9e23';
+
 export const HEADER_HEIGHT = 129;
 export const HEADER_HEIGHT_SCROLLED = 89;
 export const MOBILE_BREAKPOINT = 767;

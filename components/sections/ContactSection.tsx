@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { CONTACT, MAP_LINKS } from '@/lib/constants';
+import { CONTACT, MAP_LINKS, KAKAO_MAP_KEY } from '@/lib/constants';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
 
 declare global {
@@ -53,11 +53,14 @@ function loadKakaoSDK(): Promise<void> {
 
     // 스크립트 동적 삽입
     const script = document.createElement('script');
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_KEY}&autoload=false`;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_KEY}&autoload=false`;
     script.onload = () => {
       window.kakao.maps.load(() => resolve());
     };
-    script.onerror = () => reject(new Error('카카오맵 SDK 로드 실패'));
+    script.onerror = () => {
+      sdkPromise = null;
+      reject(new Error('카카오맵 SDK 로드 실패'));
+    };
     document.head.appendChild(script);
   });
 
