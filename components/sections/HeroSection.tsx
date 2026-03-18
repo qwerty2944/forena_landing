@@ -77,7 +77,7 @@ export default function HeroSection() {
         </div>
 
         {/* Pagination indicators — 우하단 네모 인디케이터 */}
-        <div className="absolute bottom-[16px] md:bottom-[20px] right-[16px] md:right-[80px] z-10 flex gap-[4px]">
+        <div className="absolute bottom-[16px] right-[16px] z-10 flex gap-[4px] md:hidden">
           {slides.map((_, i) => (
             <button
               key={i}
