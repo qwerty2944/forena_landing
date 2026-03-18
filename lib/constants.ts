@@ -6,7 +6,7 @@ export const HEADER_HEIGHT_SCROLLED = 89;
 export const MOBILE_BREAKPOINT = 767;
 
 export const CONTACT = {
-  phone: '1551-1491',
+  phone: '1600-4564',
   modelHouse: {
     address: '인천광역시 남동구 구월동 1140-1번지',
     mapLink: 'https://kko.to/B7FFifFhXY',
