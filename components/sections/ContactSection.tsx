@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CONTACT, MAP_LINKS } from '@/lib/constants';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
 
@@ -32,60 +32,79 @@ const LOCATIONS: { modelHouse: MapLocation; site: MapLocation } = {
   },
 };
 
+// SDK 로드 상태를 전역으로 관리 (한 번만 load 호출)
+let kakaoLoaded = false;
+let kakaoLoadPromise: Promise<void> | null = null;
+
+function loadKakaoSDK(): Promise<void> {
+  if (kakaoLoaded) return Promise.resolve();
+  if (kakaoLoadPromise) return kakaoLoadPromise;
+
+  kakaoLoadPromise = new Promise((resolve) => {
+    const check = () => {
+      if (window.kakao?.maps?.load) {
+        window.kakao.maps.load(() => {
+          kakaoLoaded = true;
+          resolve();
+        });
+      } else {
+        setTimeout(check, 100);
+      }
+    };
+    check();
+  });
+  return kakaoLoadPromise;
+}
+
 function KakaoMap({ location }: { location: MapLocation }) {
   const mapRef = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (!mapRef.current || !window.kakao?.maps) {
-      // SDK가 아직 로드 안됐으면 autoload=false이므로 load 호출
-      if (window.kakao?.maps?.load) {
-        window.kakao.maps.load(() => initMap());
-      }
-      return;
-    }
-    initMap();
+    loadKakaoSDK().then(() => setReady(true));
+  }, []);
 
-    function initMap() {
-      if (!mapRef.current) return;
-      const coords = new window.kakao.maps.LatLng(location.lat, location.lng);
-      const map = new window.kakao.maps.Map(mapRef.current, {
-        center: coords,
-        level: 3,
-      });
+  useEffect(() => {
+    if (!ready || !mapRef.current) return;
 
-      // 마커
-      const marker = new window.kakao.maps.Marker({
-        position: coords,
-        map,
-      });
+    const coords = new window.kakao.maps.LatLng(location.lat, location.lng);
+    const map = new window.kakao.maps.Map(mapRef.current, {
+      center: coords,
+      level: 3,
+    });
 
-      // 인포윈도우
-      const infowindow = new window.kakao.maps.InfoWindow({
-        content: `<div style="padding:5px 10px;font-size:13px;white-space:nowrap;">${location.label}</div>`,
-      });
-      infowindow.open(map, marker);
+    const marker = new window.kakao.maps.Marker({
+      position: coords,
+      map,
+    });
 
-      // 지도 컨트롤
-      map.addControl(
-        new window.kakao.maps.ZoomControl(),
-        window.kakao.maps.ControlPosition.RIGHT
-      );
-    }
-  }, [location]);
+    const infowindow = new window.kakao.maps.InfoWindow({
+      content: `<div style="padding:5px 10px;font-size:13px;white-space:nowrap;">${location.label}</div>`,
+    });
+    infowindow.open(map, marker);
 
-  return <div ref={mapRef} className="w-full h-[300px]" />;
+    map.addControl(
+      new window.kakao.maps.ZoomControl(),
+      window.kakao.maps.ControlPosition.RIGHT
+    );
+  }, [ready, location]);
+
+  return (
+    <div
+      ref={mapRef}
+      className="w-full h-[300px] bg-[#f5f5f5]"
+    />
+  );
 }
 
 export default function ContactSection() {
   return (
     <section className="py-[70px] pb-[80px] bg-white">
       <div className="max-w-[1440px] mx-auto px-[120px] max-lg:px-[40px] max-md:px-[20px]">
-        {/* Title - left aligned */}
         <FadeInOnScroll>
           <h2 className="text-[28px] font-bold text-text-dark tracking-[-2px] mb-[30px]">찾아오시는길</h2>
         </FadeInOnScroll>
 
-        {/* Two maps side by side */}
         <FadeInOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
             {/* 견본주택 */}
