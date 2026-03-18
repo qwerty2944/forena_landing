@@ -32,14 +32,16 @@ export default function HeroSection() {
           loop
           className="w-full h-full"
         >
-          {slides.map((slide) => (
+          {slides.map((slide, index) => (
             <SwiperSlide key={slide.id}>
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={slide.src}
                   alt={`메인 슬라이드 ${slide.id}`}
                   fill
-                  className="object-cover"
+                  className={`object-cover transition-transform duration-[5500ms] ease-out ${
+                    activeIndex === index ? 'scale-100' : 'scale-[1.15]'
+                  }`}
                   priority={slide.id === 1}
                   sizes="100vw"
                 />
