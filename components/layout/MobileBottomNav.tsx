@@ -20,7 +20,7 @@ export default function MobileBottomNav() {
           <span className="text-[10px] mt-[3px]">HOME</span>
         </Link>
         <Link
-          href="/visit/directions"
+          href="/business/contact"
           className="flex-1 flex flex-col items-center justify-center py-[10px] text-white"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

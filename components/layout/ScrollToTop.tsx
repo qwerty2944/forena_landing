@@ -36,7 +36,7 @@ export default function ScrollToTop() {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2, ease: 'easeInOut' }}
           onClick={scrollToTop}
-          className="fixed bottom-[80px] md:bottom-8 right-4 md:right-8 z-100 w-12 h-12 rounded-full bg-primary-navy text-white shadow-lg hover:bg-primary-navy/90 active:scale-95 transition-all flex items-center justify-center group"
+          className="fixed bottom-[80px] right-4 z-100 w-12 h-12 rounded-full bg-primary-navy text-white shadow-lg hover:bg-primary-navy/90 active:scale-95 transition-all flex items-center justify-center group md:hidden"
           aria-label="맨 위로 이동"
           type="button"
         >
